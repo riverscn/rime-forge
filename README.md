@@ -6,13 +6,19 @@
 
 ## 使用方法
 
-### Windows
+先安装[RIME中州韵](https://rime.im/)输入法。
+
+### Windows - Weasel 小狼毫
 
 将本目录覆盖 `%appdata%\Rime` 文件夹
 
 ### Linux - ibus-rime
 
 将本目录覆盖 `~/.config/ibus/rime` 文件夹
+
+### Mac - Squirrel 鼠须管
+
+TODO
 
 ## 预装预调输入方案
 
