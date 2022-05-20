@@ -1,3 +1,7 @@
+patch:
+  #載入朙月拼音擴充詞庫
+  'translator/dictionary': luna_pinyin.extended
+
 __patch:
 # 支持用户自定义短语
   - patch/+:
