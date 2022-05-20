@@ -26,12 +26,6 @@
 * 小鹤双拼
 * 地球拼音
 
-## 直接支持的输入法前端
-
-* Windows - Weasel 小狼毫
-* Linux - ibus-rime
-* Mac - Squirrel 鼠须管
-
 ## 注意事项
 
 * Rime 的默认基础是**繁体**字（传承字）
