@@ -1,4 +1,7 @@
 __patch:
+# 支持用户自定义词典
+  - patch/+:
+      __include: custom_phrase:/patch
 # 优化的符号输入
   - patch/+:
       __include: symbols_punctuator:/patch
