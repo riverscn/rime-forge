@@ -5,3 +5,5 @@ patch:
     - schema: terra_pinyin
   menu:
     page_size: 8
+  "switcher/save_options/+":
+      - charset_filter

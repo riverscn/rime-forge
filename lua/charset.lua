@@ -53,11 +53,13 @@ filter 的输出与 translator 相同，也是若干候选项，也要求您使�
 
 如下例所示，charset_filter 将滤除含 CJK 扩展汉字的候选项：
 --]]
-local function charset_filter(input)
+local function charset_filter(input, env)
+   -- 检查开关
+   b = env.engine.context:get_option("charset_filter")
    -- 使用 `iter()` 遍历所有输入候选项
    for cand in input:iter() do
       -- 如果当前候选项 `cand` 不含 CJK 扩展汉字
-      if (not exists(is_cjk_ext, cand.text))
+      if (not b or not exists(is_cjk_ext, cand.text))
       then
 	 -- 结果中仍保留此候选
 	 yield(cand)
