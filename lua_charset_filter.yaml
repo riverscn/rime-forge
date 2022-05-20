@@ -1,0 +1,9 @@
+# encoding: utf-8
+
+patch:
+  'switches/@before last':
+    name: charset_filter
+    reset: 1
+    states: [ 全集, 常用 ]
+  'engine/filters/@before last': 
+    lua_filter@charset_filter
