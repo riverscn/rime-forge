@@ -8,6 +8,7 @@ charset_comment_filter: 为候选项加上其所属字符集的注释
 --]]
 
 -- 帮助函数（可跳过）
+local reserved 
 local charset = {
    ["CJK"] = { first = 0x4E00, last = 0x9FFF },
    ["ExtA"] = { first = 0x3400, last = 0x4DBF },
