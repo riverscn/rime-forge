@@ -4,5 +4,6 @@ patch:
     - schema: luna_pinyin_simp
     - schema: luna_pinyin_fluency
     - schema: double_pinyin_flypy
+    - schema: stroke
   menu:
     page_size: 8
