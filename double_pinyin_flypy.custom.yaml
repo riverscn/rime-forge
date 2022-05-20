@@ -1,0 +1,34 @@
+patch:
+  punctuator:
+    import_preset: symbols
+    # 自定义快捷符号输入
+    # symbols:
+    #   "/fs": [½, ‰, ¼, ⅓, ⅔, ¾, ⅒ ]
+    half_shape:
+      "#": "#"
+      "*": "*"
+      "`": "`"
+      "~": "~"
+      "@": "@"
+      "=": "="
+      "/": ["/", "÷",]
+      '\': "、"
+      # "_" : "──"
+      "'": {pair: ["「", "」"]}
+      "[": ["【", "["]
+      "]": ["】", "]"]
+      "$": ["¥", "$", "€", "£", "¢", "¤"]
+      "<": ["《", "〈", "«", "<"]
+      ">": ["》", "〉", "»", ">"]
+
+  recognizer/patterns/punct: "^/([0-9]0?|[A-Za-z]+)$"
+
+__patch:
+# Rx: emoji:customize:schema=double_pinyin_flypy {
+  - patch/+:
+      __include: emoji_suggestion:/patch
+# }
+# Rx: lotem/rime-octagram-data:customize:schema=double_pinyin_flypy,model=hant {
+  - patch/+:
+      __include: grammar:/hant
+# }
