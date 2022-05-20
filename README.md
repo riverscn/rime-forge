@@ -18,7 +18,7 @@
 
 ### Mac - Squirrel 鼠须管
 
-TODO
+将本目录覆盖 `~/Library/Rime` 文件夹
 
 ## 预装预调输入方案
 
@@ -28,8 +28,9 @@ TODO
 
 ## 直接支持的输入法前端
 
-* Windows - Weasel/小狼毫
+* Windows - Weasel 小狼毫
 * Linux - ibus-rime
+* Mac - Squirrel 鼠须管
 
 ## 注意事项
 
