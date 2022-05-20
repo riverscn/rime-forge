@@ -37,7 +37,7 @@ patch:
 
   "style/color_scheme": Windows
 
-  preset_color_schemes:
+  preset_color_schemes/+:
     "Micosoft":
       name: "Micosoft"
       author: "XNOM"
