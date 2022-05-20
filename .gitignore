@@ -39,8 +39,9 @@ luac.out
 *.x86_64
 *.hex
 
-# Userdb
+# Rime
 *.userdb
 /sync
 /build
 user.yaml
+installation.yaml
