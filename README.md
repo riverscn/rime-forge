@@ -20,7 +20,7 @@
 
 ![](https://user-images.githubusercontent.com/555062/169637478-163b8836-b4e2-40fa-90b3-0f959de42540.png)
 
-![image](https://user-images.githubusercontent.com/555062/169648094-3450227e-e48c-40ee-b1af-3df6e69bc7d2.png)
+![](https://user-images.githubusercontent.com/555062/169648094-3450227e-e48c-40ee-b1af-3df6e69bc7d2.png)
 
 
 ### Linux - ibus-rime
