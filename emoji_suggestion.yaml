@@ -5,7 +5,7 @@ patch:
     name: emoji_suggestion
     reset: 1
     states: [ "🈚️", "🈶️" ]
-  'engine/filters/@next':
+  'engine/filters/@before 0':
     simplifier@emoji_suggestion
   emoji_suggestion:
     opencc_config: emoji.json
