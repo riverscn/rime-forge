@@ -1,3 +1,20 @@
+# 中西文切換鍵的默認設置寫在 default.yaml 裏面
+# 以下的 default.custom.yaml 在全局範圍重定義該組快速鍵
+#
+# 可用的按鍵有 Caps_Lock, Shift_L, Shift_R, Control_L, control_R
+# Mac 系統上的鼠鬚管不能區分左、右，因此只有對 Shift_L, Control_L 的設定起作用
+#
+# 已輸入編碼時按切換鍵，可以進一步設定輸入法中西文切換的形式。
+# 可選的臨時切換策略有三：
+# inline_ascii 在輸入法的臨時西文編輯區內輸入字母、數字、符號、空格等，回車上屏後自動復位到中文
+# commit_text 已輸入的候選文字上屏並切換至西文輸入模式
+# commit_code 已輸入的編碼字符上屏並切換至西文輸入模式
+# 設爲 noop，屏蔽該切換鍵
+#
+# 如果要把 Caps Lock 設爲只改變字母的大小寫而不做中西文切換，可將 Caps_Lock 對應的切換方式設爲 noop
+# 如果要以 Caps Lock 切換到西文模式，默認輸出小寫字母，請置 ascii_composer/good_old_caps_lock: false
+# 如果要以 Caps Lock 切換到西文模式，默認輸出大寫字母，請使用以下設置：
+
 patch:
   schema_list:
     - schema: luna_pinyin
@@ -7,3 +24,12 @@ patch:
     page_size: 7
   "switcher/save_options/+":
       - charset_filter
+  ascii_composer:
+    good_old_caps_lock: true
+    switch_key:
+      Shift_L: commit_code
+      Shift_R: commit_text
+      Control_L: noop
+      Control_R: noop
+      Caps_Lock: clear
+      Eisu_toggle: clear
