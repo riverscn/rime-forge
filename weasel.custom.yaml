@@ -33,7 +33,7 @@ patch:
   # "style/layout/hilite_spacing": 3 # 序号和候选字之间的间隔
   "style/layout/spacing": 15 #编码和候选字上下距离
   "style/layout/candidate_spacing": 14 # 候选字间隔
-  # "style/layout/round_corner": 15 #候选字背景色块圆角幅度
+  "style/layout/round_corner": 0 #候选字背景色块圆角幅度
 
   "style/color_scheme": Windows
 
