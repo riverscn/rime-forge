@@ -45,4 +45,5 @@ import_tables:
   - dict/luna_pinyin.hanyu
   - dict/luna_pinyin.poetry
   - dict/luna_pinyin.xiandaihanyu_t
+  - dict/luna_pinyin.practical
 ...
