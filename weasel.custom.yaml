@@ -60,4 +60,5 @@ patch:
       hilited_back_color: 0xF9F9F9 #已选择字右侧拼音 背景色
       hilited_candidate_text_color: 0x191919 #候选字颜色
       hilited_candidate_back_color: 0xE0E0E0 #候选字背景色
-      candidate_text_color: 0x191919 #未候选字颜色
+      candidate_text_color: 0x191919 #候选字颜色
+      comment_text_color: 0x888888  #拼音等提示文字颜色
