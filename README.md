@@ -14,6 +14,13 @@
 
 将本目录覆盖 `%appdata%\Rime` 文件夹
 
+![](https://user-images.githubusercontent.com/555062/169637295-bcafc054-94ad-4744-a9c0-bb27eb619eee.png)
+
+![](https://user-images.githubusercontent.com/555062/169637437-68246475-b5ee-40ff-8127-61d9f04b55ee.png)
+
+![](https://user-images.githubusercontent.com/555062/169637478-163b8836-b4e2-40fa-90b3-0f959de42540.png)
+
+
 ### Linux - ibus-rime
 
 将本目录覆盖 `~/.config/ibus/rime` 文件夹
