@@ -7,7 +7,213 @@ charset_comment_filter: 为候选项加上其所属字符集的注释
 请见 `charset_filter` 和 `charset_comment_filter` 上方注释。
 --]]
 
--- 帮助函数（可跳过）
+--可在这里自定义增补8105以外的汉字，不过滤，但会标注非常用字
+local reserved_custom = [[
+𪚠
+]]
+--[[《通用规范汉字表》内收录了 196 个不在Unicode的基本多文种平面
+（BMP，Basic Multilingual Plane）内的汉字，即不在中日韩统一表意
+文字基本区及中日韩统一表意文字扩展区A的汉字。
+--]]
+--由于lua的utf8函数能力所限，还有196个汉字只能用字符串检测
+local reserved_ext = [[
+𬉼
+𠳐
+𥻗
+𠙶
+𬣙
+𨙸
+𬇕
+𬣞
+𬘓
+𫭟
+𫭢
+𫇭
+𫐄
+𫵷
+𣲘
+𣲗
+𬇙
+𬣡
+𫸩
+𨚕
+𫘜
+𬘘
+𫘝
+𦭜
+𬨂
+𬀩
+𬀪
+𬬩
+𫍣
+𬣳
+𬩽
+𬮿
+𬯀
+𫰛
+𬳵
+𬳶
+𫠊
+𬍛
+𬜬
+𦰡
+𪾢
+𪨰
+𫓧
+𬬮
+𬬱
+𬬭
+𦙶
+𬘡
+𬳽
+𬘩
+𫄧
+𪟝
+𬍤
+𫭼
+𬜯
+𬂩
+𫠆
+𨐈
+𬌗
+𫑡
+𪨶
+𬬸
+𬬻
+𬬹
+𬬿
+𬭁
+𫢸
+𫗧
+𬊈
+𬒈
+𨺙
+𬳿
+𫄨
+𬘫
+𫮃
+𬱖
+𬟽
+𫓯
+𫟹
+𫟼
+𠅤
+𬇹
+𬍡
+𬤇
+𫍯
+𬤊
+𫍲
+𬯎
+𬘬
+𬘭
+𬴂
+𫘦
+𫟅
+𬘯
+𫘧
+𪣻
+𡎚
+𬃊
+𬷕
+𫐐
+𬹼
+𧿹
+𫶇
+𫖮
+𬭊
+𨱇
+𫓶
+𬭎
+𫖯
+𬱟
+𫛭
+𫷷
+𬮱
+𬊤
+𣸣
+𬴃
+𫘨
+𤧛
+𬪩
+𬒔
+𬨎
+𫐓
+𫫇
+𫓹
+𬭚
+𬭛
+𬕂
+𬶋
+𬶍
+𦝼
+𫔶
+𫌀
+𫖳
+𫘪
+𫘬
+𫞩
+𡐓
+𪤗
+𣗋
+𬸘
+𬒗
+𥔲
+𫚖
+𨱏
+𬭤
+𫚕
+𬶐
+𬶏
+𩽾
+𬸚
+𬤝
+𬙂
+𬭩
+𩾃
+𬸣
+𫍽
+𬴊
+𬞟
+𥕢
+𫟦
+𬺈
+𫠜
+𪩘
+𬭬
+𨱑
+𬭯
+𫗴
+𬸦
+𫄷
+𤩽
+𬭳
+𬭶
+𫔍
+𬭸
+𨱔
+𬭼
+𫔎
+𬸪
+𬶟
+𬶠
+𬶨
+𦈡
+𫄸
+𬟁
+𥖨
+𦒍
+𬙊
+𬶭
+𩾌
+𨟠
+𬶮
+𨭉
+𬙋
+𤫉
+𬺓
+𫚭
+]]
 local reserved = {
    0x4e00,
    0x4e59,
@@ -8183,11 +8389,11 @@ local function charset_filter(input, env)
     b_simplification = env.engine.context:get_option("simplification")
     -- 使用 `iter()` 遍历所有输入候选项
     for cand in input:iter() do
-        -- 如果当前候选项 `cand` 不含 CJK 扩展汉字，或属于8105规范汉字
-        if (not b_charset_filter or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text)) then
+        -- 如果当前候选项 `cand` 不含 CJK 扩展汉字，或属于8105规范汉字，或属于自定义增补汉字
+        if (not b_charset_filter or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text) or string.find(reserved_ext .. reserved_custom, cand.text)) then
             -- 判断当前候选内容 `cand.text` 中文字是否属于8105，如不符则打上标记
-            -- 仅在打开了简体字时生效
-            if (b_simplification and not exists(is_8105, cand.text) and exists(is_cjk, cand.text)) then
+            -- 仅在打开了简体字时生效 不在8015表中 但属于CJK字符或在自定义增补汉字
+            if (b_simplification and not (exists(is_8105, cand.text) or string.find(reserved_ext, cand.text)) and (exists(is_cjk, cand.text) or string.find(reserved_custom, cand.text))) then
                --[[ 修改候选的注释 `cand.comment`
                因复杂类型候选项的注释不能被直接修改，
                因此使用 `get_genuine()` 得到其对应真实的候选项
@@ -8197,7 +8403,7 @@ local function charset_filter(input, env)
             -- 结果中仍保留此候选
             yield(cand)
         end
-        -- cand:get_genuine().comment = cand.text
+        -- cand:get_genuine().comment = tostring(exists(is_8105, cand.text) or string.find(reserved_ext, cand.text))
         --[[ 上述条件不满足时，当前的候选 `cand` 没有被 yield。
            因此过滤结果中将不含有该候选。
       --]]
