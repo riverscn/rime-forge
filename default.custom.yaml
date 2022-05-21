@@ -4,6 +4,6 @@ patch:
     - schema: double_pinyin_flypy
     - schema: terra_pinyin
   menu:
-    page_size: 8
+    page_size: 7
   "switcher/save_options/+":
       - charset_filter
