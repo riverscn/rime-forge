@@ -12,6 +12,9 @@ __patch:
 # 支持常用字筛选
   - patch/+:
       __include: lua_charset_filter:/patch
+# 支持异形词提示
+  - patch/+:
+      __include: correction_comment:/patch
 # Rx: emoji:customize:schema=double_pinyin_flypy {
   - patch/+:
       __include: emoji_suggestion:/patch

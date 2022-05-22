@@ -46,4 +46,5 @@ import_tables:
   - dict/luna_pinyin.poetry #常用诗词，来源于唐宋诗词、千家詩、花間集、楚辭、詩經。 2.6w
   - dict/luna_pinyin.xiandaihanyu_t #现代汉语常用词表，教育部标准词表，5.6w
   - dict/luna_pinyin.practical #挺全面的基本词库，含很丰富基本词条和组句语料，成语、俗语、诗词、人名词条不多。40w
+  - dict/luna_pinyin.correction_t #《第一批异形词整理表》与《第二批异形词整理表（草案）》收录的正式词汇
 ...

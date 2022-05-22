@@ -1,0 +1,13 @@
+# encoding: utf-8
+
+patch:
+  'engine/filters/@before 2':
+    simplifier@correction_comment
+  correction_comment:
+    option_name: simplification
+    opencc_config: correction.json
+    #option_name: correction_comment
+    tips: all
+    show_in_comment: true #只提示，不转换
+
+zhen xiang

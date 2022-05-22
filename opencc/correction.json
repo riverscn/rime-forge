@@ -1,0 +1,20 @@
+{
+    "name": "Simplified Chinese Words Correction",
+    "segmentation": {
+      "type": "mmseg",
+      "dict": {
+        "type": "text",
+        "file": "correction.txt"
+      }
+    },
+    "conversion_chain": [{
+      "dict": {
+        "type": "group",
+        "dicts": [{
+          "type": "text",
+          "file": "correction.txt"
+        }]
+      }
+    }]
+  }
+  
