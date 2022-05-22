@@ -8189,7 +8189,11 @@ local function charset_filter(input, env)
             因复杂类型候选项的注释不能被直接修改，
             因此使用 `get_genuine()` 得到其对应真实的候选项
             --]]
-                cand:get_genuine().comment = "*"
+                if cand.comment then
+                    cand:get_genuine().comment = "* " .. cand.comment
+                else
+                    cand:get_genuine().comment = "*"
+                end
             end
             -- 结果中仍保留此候选
             yield(cand)
