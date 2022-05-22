@@ -8127,43 +8127,39 @@ local charset = {
    ["ExtG"] = {first = 0x30000, last = 0x3134F } }
 
 local function exists(single_filter, text)
-   for i in utf8.codes(text) do
-      local c = utf8.codepoint(text, i)
-      if (not single_filter(c)) then
-         return false
-      end
-   end
-   return true
+    for i in utf8.codes(text) do
+        local c = utf8.codepoint(text, i)
+        if (not single_filter(c)) then
+            return false
+        end
+    end
+    return true
 end
 
 local function is_charset(s)
-   return function (c)
-     return c >= charset[s].first and c <= charset[s].last
-   end
+    return function(c)
+        return c >= charset[s].first and c <= charset[s].last
+    end
 end
 
 local function is_cjk_ext(c)
-   return is_charset("ExtA")(c) or is_charset("ExtB")(c) or
-     is_charset("ExtC")(c) or is_charset("ExtD")(c) or
-     is_charset("ExtE")(c) or is_charset("ExtF")(c) or
-     is_charset("Compat")(c) or is_charset("ExtG")(c)
+    return is_charset("ExtA")(c) or is_charset("ExtB")(c) or is_charset("ExtC")(c) or is_charset("ExtD")(c) or
+               is_charset("ExtE")(c) or is_charset("ExtF")(c) or is_charset("Compat")(c) or is_charset("ExtG")(c)
 end
 
 local function is_cjk(c)
-   return is_charset("ExtA")(c) or is_charset("ExtB")(c) or
-     is_charset("ExtC")(c) or is_charset("ExtD")(c) or
-     is_charset("ExtE")(c) or is_charset("ExtF")(c) or
-     is_charset("Compat")(c) or is_charset("ExtG")(c) or
-     is_charset("CJK")(c)
+    return is_charset("ExtA")(c) or is_charset("ExtB")(c) or is_charset("ExtC")(c) or is_charset("ExtD")(c) or
+               is_charset("ExtE")(c) or is_charset("ExtF")(c) or is_charset("Compat")(c) or is_charset("ExtG")(c) or
+               is_charset("CJK")(c)
 end
 
 local function is_8105(c)
-   for _,v in pairs(reserved) do
-     if v == c then
-      return true
-     end
-   end
-   return false
+    for _, v in pairs(reserved) do
+        if v == c then
+            return true
+        end
+    end
+    return false
 end
 
 --[[
@@ -8179,54 +8175,56 @@ filter 的输出与 translator 相同，也是若干候选项，也要求您使�
 如下例所示，charset_filter 将滤除含 CJK 扩展汉字的候选项：
 --]]
 local function charset_filter(input, env)
-   -- 检查开关
-   b_charset_filter = env.engine.context:get_option("charset_filter")
-   b_simplification = env.engine.context:get_option("simplification")
-   -- 使用 `iter()` 遍历所有输入候选项
-   for cand in input:iter() do
-      -- 如果当前候选项 `cand` 不含 CJK 扩展汉字，或属于8105规范汉字
-      if (not b_charset_filter or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text)) then
-         -- 判断当前候选内容 `cand.text` 中文字是否属于8105，如不符则打上标记
-         -- 仅在打开了简体字时生效 不在8015表中 但属于中日韩统一表意文字
-         if (b_simplification and not exists(is_8105, cand.text) and exists(is_cjk, cand.text)) then
-            --[[ 修改候选的注释 `cand.comment`
+    -- 检查开关
+    b_charset_filter = env.engine.context:get_option("charset_filter")
+    b_simplification = env.engine.context:get_option("simplification")
+    -- 使用 `iter()` 遍历所有输入候选项
+    for cand in input:iter() do
+        -- 如果当前候选项 `cand` 不含 CJK 扩展汉字，或属于8105规范汉字
+        if (not b_charset_filter or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text)) then
+            -- 判断当前候选内容 `cand.text` 中文字是否属于8105，如不符则打上标记
+            -- 仅在打开了简体字时生效 不在8015表中 但属于中日韩统一表意文字
+            if (b_simplification and not exists(is_8105, cand.text) and exists(is_cjk, cand.text)) then
+                --[[ 修改候选的注释 `cand.comment`
             因复杂类型候选项的注释不能被直接修改，
             因此使用 `get_genuine()` 得到其对应真实的候选项
             --]]
-            cand:get_genuine().comment = "*"
-         end
-         -- 结果中仍保留此候选
-         yield(cand)
-      end
-      --[[ 上述条件不满足时，当前的候选 `cand` 没有被 yield。
+                cand:get_genuine().comment = "*"
+            end
+            -- 结果中仍保留此候选
+            yield(cand)
+        end
+        --[[ 上述条件不满足时，当前的候选 `cand` 没有被 yield。
          因此过滤结果中将不含有该候选。
      --]]
-   end
+    end
 end
-
 
 --[[
 如下例所示，charset_comment_filter 为候选项加上其所属字符集的注释：
 --]]
 local function charset_comment_filter(input)
-   -- 使用 `iter()` 遍历所有输入候选项
-   for cand in input:iter() do
-      -- 判断当前候选内容 `cand.text` 中文字属哪个字符集
-      for s, r in pairs(charset) do
-         if (exists(is_charset(s), cand.text)) then
-            --[[ 修改候选的注释 `cand.comment`
+    -- 使用 `iter()` 遍历所有输入候选项
+    for cand in input:iter() do
+        -- 判断当前候选内容 `cand.text` 中文字属哪个字符集
+        for s, r in pairs(charset) do
+            if (exists(is_charset(s), cand.text)) then
+                --[[ 修改候选的注释 `cand.comment`
              因复杂类型候选项的注释不能被直接修改，
              因此使用 `get_genuine()` 得到其对应真实的候选项
          --]]
-            cand:get_genuine().comment = cand.comment .. " " .. s
-            break
-         end
-      end
-      -- 在结果中对应产生一个带注释的候选
-      yield(cand)
-   end
+                cand:get_genuine().comment = cand.comment .. " " .. s
+                break
+            end
+        end
+        -- 在结果中对应产生一个带注释的候选
+        yield(cand)
+    end
 end
 
 -- 本例中定义了两个 filter，故使用一个表将两者导出
-return { filter = charset_filter,
-	 comment_filter = charset_comment_filter }
+return {
+    filter = charset_filter,
+    comment_filter = charset_comment_filter
+}
+
