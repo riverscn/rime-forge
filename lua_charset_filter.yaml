@@ -4,6 +4,6 @@ patch:
   'switches/@before last':
     name: charset_filter
     reset: 1
-    states: [ 全集, 常用 ]
+    states: [ 擴展, 常用 ]
   'engine/filters/@before last': 
     lua_filter@charset_filter
