@@ -8176,12 +8176,12 @@ filter 的输出与 translator 相同，也是若干候选项，也要求您使�
 --]]
 local function charset_filter(input, env)
     -- 检查开关
-    b_charset_filter = env.engine.context:get_option("charset_filter")
+    b_extended_charset = env.engine.context:get_option("extended_charset")
     b_simplification = env.engine.context:get_option("simplification")
     -- 使用 `iter()` 遍历所有输入候选项
     for cand in input:iter() do
         -- 如果当前候选项 `cand` 不含 CJK 扩展汉字，或属于8105规范汉字
-        if (not b_charset_filter or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text)) then
+        if (b_extended_charset or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text)) then
             -- 判断当前候选内容 `cand.text` 中文字是否属于8105，如不符则打上标记
             -- 仅在打开了简体字时生效 不在8015表中 但属于中日韩统一表意文字
             if (b_simplification and not exists(is_8105, cand.text) and exists(is_cjk, cand.text)) then

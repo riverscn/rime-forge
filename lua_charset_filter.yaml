@@ -2,8 +2,8 @@
 
 patch:
   'switches/@before last':
-    name: charset_filter
-    reset: 1
-    states: [ 擴展, 常用 ]
+    name: extended_charset
+    reset: 0
+    states: [ 通用, 擴展 ]
   'engine/filters/@before last': 
     lua_filter@charset_filter
