@@ -8115,6 +8115,11 @@ local reserved = {
    0x0883c, -- 蠼
 }
 
+-- 自定义增补字，不过滤，但扔会打*
+local extra= {
+   0x30EDE, -- 𰻞 biang
+}
+
 local charset = {
    ["CJK"] = { first = 0x4E00, last = 0x9FFF },
    ["ExtA"] = { first = 0x3400, last = 0x4DBF },
@@ -8162,6 +8167,15 @@ local function is_8105(c)
     return false
 end
 
+local function is_extra(c)
+   for _, v in pairs(extra) do
+       if v == c then
+           return true
+       end
+   end
+   return false
+end
+
 --[[
 filter 的功能是对 translator 翻译而来的候选项做修饰，
 如去除不想要的候选、为候选加注释、候选项重排序等。
@@ -8180,12 +8194,12 @@ local function charset_filter(input, env)
     b_simplification = env.engine.context:get_option("simplification")
     -- 使用 `iter()` 遍历所有输入候选项
     for cand in input:iter() do
-        -- 如果当前候选项 `cand` 不含 CJK 扩展汉字，或属于8105规范汉字
-        if (b_extended_charset or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text)) then
-            -- 判断当前候选内容 `cand.text` 中文字是否属于8105，如不符则打上标记
+        -- 如果当前候选项 `cand` 不含 CJK 扩展汉字，或属于8105规范汉字，或属于增补，结果中仍保留此候选
+        if (b_extended_charset or not exists(is_cjk_ext, cand.text) or exists(is_8105, cand.text) or exists(is_extra, cand.text)) then
+            -- 判断当前候选内容 `cand.text` 中文字是否属于8105，如不符则打上*标记
             -- 仅在打开了简体字时生效 不在8015表中 但属于中日韩统一表意文字
             if (b_simplification and not exists(is_8105, cand.text) and exists(is_cjk, cand.text)) then
-                --[[ 修改候选的注释 `cand.comment`
+            --[[ 修改候选的注释 `cand.comment`
             因复杂类型候选项的注释不能被直接修改，
             因此使用 `get_genuine()` 得到其对应真实的候选项
             --]]
