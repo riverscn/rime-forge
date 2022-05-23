@@ -6,6 +6,11 @@ charset_comment_filter: 为候选项加上其所属字符集的注释
 
 请见 `charset_filter` 和 `charset_comment_filter` 上方注释。
 --]]
+-- 自定义增补字，不过滤，但扔会打*
+local extra= {
+   0x30EDE, -- 𰻞 biang
+}
+
 -- 通用规范字表
 local reserved = {
    0x04e00, -- 一
@@ -8113,11 +8118,6 @@ local reserved = {
    0x09f47, -- 齇
    0x089ff, -- 觿
    0x0883c, -- 蠼
-}
-
--- 自定义增补字，不过滤，但扔会打*
-local extra= {
-   0x30EDE, -- 𰻞 biang
 }
 
 local charset = {
