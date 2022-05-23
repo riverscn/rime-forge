@@ -22,8 +22,6 @@ patch:
     - schema: terra_pinyin
   menu:
     page_size: 7
-  "switcher/save_options/+":
-      - charset_filter
   ascii_composer:
     good_old_caps_lock: true
     switch_key:
