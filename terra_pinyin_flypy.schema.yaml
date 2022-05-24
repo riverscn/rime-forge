@@ -2,8 +2,8 @@
 # encoding: utf-8
 
 schema:
-  schema_id: tdrl_pinyin_flypy
-  name: 帶調小鶴雙拼
+  schema_id: terra_pinyin_flypy
+  name: 地球小鶴雙拼
   version: "0.1"
   author:
     - double pinyin layout by 鶴
