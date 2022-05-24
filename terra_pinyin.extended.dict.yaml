@@ -44,7 +44,7 @@ import_tables:
   - terra_pinyin
   - dict/hanyu #汉语大词典，多为2字词。 2.2w
   - dict/poetry #常用诗词，来源于唐宋诗词、千家詩、花間集、楚辭、詩經。 2.6w
-#  - dict/luna_pinyin.xiandaihanyu_t #现代汉语常用词表，教育部标准词表，5.6w
+  - dict/terra_pinyin.xiandaihanyu_t #现代汉语常用词表，教育部标准词表，5.6w
   - dict/practical #挺全面的基本词库，含很丰富基本词条和组句语料，成语、俗语、诗词、人名词条不多。40w
   - dict/correction_t #《第一批异形词整理表》与《第二批异形词整理表（草案）》收录的正式词汇
 ...

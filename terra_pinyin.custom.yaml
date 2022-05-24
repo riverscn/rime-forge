@@ -1,0 +1,27 @@
+patch:
+  #載入朙月拼音擴充詞庫
+  'translator/dictionary': terra_pinyin.extended
+  'translator/preedit_format/@17':
+    xform/([bjqxnl])l/$1iang/ #支持biang
+
+__patch:
+# 支持用户自定义短语
+  - patch/+:
+      __include: custom_phrase:/patch
+# 优化的符号输入
+  - patch/+:
+      __include: symbols_punctuator:/patch
+# 支持常用字筛选
+  - patch/+:
+      __include: lua_charset_filter:/patch
+# 支持异形词提示
+  - patch/+:
+      __include: correction_comment:/patch
+# Rx: emoji:customize:schema=double_pinyin_flypy {
+  - patch/+:
+      __include: emoji_suggestion:/patch
+# }
+# Rx: lotem/rime-octagram-data:customize:schema=double_pinyin_flypy,model=hant {
+  - patch/+:
+      __include: grammar:/hant
+# }

@@ -20,6 +20,7 @@ patch:
     - schema: luna_pinyin
     - schema: double_pinyin_flypy
     - schema: terra_pinyin
+    - schema: terra_pinyin_flypy
   menu:
     page_size: 7
   ascii_composer:
