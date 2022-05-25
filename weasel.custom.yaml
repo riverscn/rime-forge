@@ -21,8 +21,8 @@ patch:
   # 以下修改皮肤
   "style/display_tray_icon": false
   "style/horizontal": true #横排显示
-  "style/font_face": "Microsoft YaHei" #字体
-  "style/font_point": 12 #字体大小
+  "style/font_face": "Source Han Sans SC" #字体
+  "style/font_point": 13 #字体大小
   "style/inline_preedit": true # 嵌入式候选窗单行显示
 
   # "style/layout/border_width": 0
