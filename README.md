@@ -12,7 +12,7 @@
 
 ### Windows - Weasel 小狼毫
 
-将本目录覆盖 `%appdata%\Rime` 文件夹
+将本目录覆盖 `%appdata%\Roaming\Rime` 文件夹
 
 ![](https://user-images.githubusercontent.com/555062/169637295-bcafc054-94ad-4744-a9c0-bb27eb619eee.png)
 
